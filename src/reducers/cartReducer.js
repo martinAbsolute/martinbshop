@@ -1,6 +1,10 @@
 import { GET_CART, ADD_TO_CART, REMOVE_FROM_CART, LOAD_CART_DATA } from '../actions'
 
-export default function (state, action) {
+const initialState = {
+    cart:['1','2','3'],
+}
+
+export default function (state = initialState, action) {
     switch (action.type) {
         case GET_CART:
             return {

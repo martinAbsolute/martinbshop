@@ -17,6 +17,7 @@ class Cart extends Component {
 
     render() {
         const { cart } = this.props.cart
+        console.log(cart)
         return <div>
             {cart.map(id =>
                 <div style={{backgroundColor: '#ffe6ff'}}>
@@ -39,7 +40,7 @@ const mapStateToProps = state => ({
 Cart.propTypes = {
     getCart: PropTypes.func.isRequired,
     removeFromCart: PropTypes.func.isRequired,
-    cart: PropTypes.object.isRequired,
+    cart: PropTypes.array.isRequired,
 }
 
 export default withRouter(connect(mapStateToProps, { getCart, removeFromCart })(Cart))
