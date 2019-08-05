@@ -14,6 +14,14 @@ class ShopDisplay extends Component {
         this.props.fetchProducts('http://localhost:3001/api/product', categoryToLoad)
     }
 
+    componentDidUpdate(prevProps) {
+        if (prevProps.location.search !== this.props.location.search) {
+            const params = new URLSearchParams(this.props.location.search)
+            const categoryToLoad = params.get("category")
+            this.props.fetchProducts('http://localhost:3001/api/product', categoryToLoad)
+        }
+    }
+
     render() {
         if (this.props.isLoading) {
             return <p>Loading...</p>

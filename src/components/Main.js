@@ -3,6 +3,7 @@ import React from 'react'
 import Cart from './Cart'
 import ShopDisplay from './ShopDisplay'
 import CategorySelector from './CategorySelector'
+import ProductPage from './ProductPage';
 
 // Router
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
@@ -18,6 +19,7 @@ export default function Main() {
             <Switch>
                 <Route exact path='/cart' component={Cart}></Route>
                 <Route exact path='/shop' component={ShopDisplay}></Route>
+                <Route exact path='/product/:id' component={ProductPage}></Route>
             </Switch>
         </Router>
     </Provider>
