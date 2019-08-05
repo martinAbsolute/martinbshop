@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 
-import { getCart, removeFromCart } from '../actions/cartActions'
+import { getCart, removeFromCart } from '../actions/cart'
 import PropTypes from 'prop-types'
 
 class Cart extends Component {

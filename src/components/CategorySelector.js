@@ -2,30 +2,29 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 
-import { getCategories, categoriesLoading, fetchCategories } from '../actions/cartActions'
+import { fetchCategories } from '../actions/categorySelector'
 import PropTypes from 'prop-types'
 
 class CategorySelector extends Component {
 
     componentDidMount() {
-        this.props.getCart()
-    }
-
-    deleteButtonClick = id => {
-        this.props.removeFromCart(id)
+        this.props.fetchCategories('http://localhost:3001/api/category')
     }
 
     render() {
-        const { cart } = this.props.cart
+        if (this.props.isLoading) {
+            return <p>Loading...</p>
+        }
+        if (this.props.hasErrored) {
+            return <p>Sorry, there was a problem loading categories...</p>
+        }
+
+        const categories = this.props.categories
         return <div>
-            {cart.map(id =>
-                <div style={{backgroundColor: '#ffe6ff'}}>
-                    <h3>{id}</h3>
-                    <button
-                        type="button"
-                        onClick={() => this.deleteButtonClick(id)}>
-                        Remove
-                    </button>
+            {categories.map(item =>
+                <div style={{ backgroundColor: 'blue' }}>
+                    <h3>{item.name}</h3>
+                    <h3>{item._id}</h3>
                 </div>
             )}
         </div>
@@ -33,13 +32,22 @@ class CategorySelector extends Component {
 }
 
 const mapStateToProps = state => ({
-    cart: state.cart
+    categories: state.categories,
+    isLoading: state.categoriesLoading,
+    hasErrored: state.categoriesErrored,
 })
 
-CategorySelector.propTypes = {
-    getCategories: PropTypes.func.isRequired,
-    categoriesLoading: PropTypes.func.isRequired,
-    fetchCategories: PropTypes.object.isRequired,
+const mapDispatchToProps = dispatch => {
+    return {
+        fetchCategories: url => dispatch(fetchCategories(url))
+    }
 }
 
-export default withRouter(connect(mapStateToProps, { getCategories, categoriesLoading, fetchCategories })(CategorySelector))
+CategorySelector.propTypes = {
+    fetchCategories: PropTypes.func.isRequired,
+    categories: PropTypes.array.isRequired,
+    isLoading: PropTypes.bool.isRequired,
+    hasErrored: PropTypes.bool.isRequired,
+}
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(CategorySelector))

@@ -12,11 +12,11 @@ const {
     update: updateUser,
     deleteById: deleteUserById,
 } = require('./controllers/users')
-router.get('/user', getAllUsers)
-router.post('/user', createUser)
-router.get('/user/:id', findUserById)
-router.put('/user/:id', updateUser)
-router.delete('/user/:id', deleteUserById)
+router.get('/api/user', getAllUsers)
+router.post('/api/user', createUser)
+router.get('/api/user/:id', findUserById)
+router.put('/api/user/:id', updateUser)
+router.delete('/api/user/:id', deleteUserById)
 
 // Category routing 
 const {
@@ -26,11 +26,11 @@ const {
     update: updateCategory,
     deleteById: deleteCategoryById,
 } = require('./controllers/categories')
-router.get('/category', getAllCategories)
-router.post('/category', createCategory)
-router.get('/category/:id', findCategoryById)
-router.put('/category/:id', updateCategory)
-router.delete('/category/:id', deleteCategoryById)
+router.get('/api/category', getAllCategories)
+router.post('/api/category', createCategory)
+router.get('/api/category/:id', findCategoryById)
+router.put('/api/category/:id', updateCategory)
+router.delete('/api/category/:id', deleteCategoryById)
 
 // Product routing
 const {
@@ -40,11 +40,11 @@ const {
     update: updateProduct,
     deleteById: deleteProductById,
 } = require('./controllers/products')
-router.get('/product', getAllProducts)
-router.post('/product', createProduct)
-router.get('/product/:id', findProductById)
-router.put('/product/:id', updateProduct)
-router.delete('/product/:id', deleteProductById)
+router.get('/api/product', getAllProducts)
+router.post('/api/product', createProduct)
+router.get('/api/product/:id', findProductById)
+router.put('/api/product/:id', updateProduct)
+router.delete('/api/product/:id', deleteProductById)
 
 // Order routing
 const {
@@ -54,10 +54,10 @@ const {
     update: updateOrder,
     deleteById: deleteOrderById,
 } = require('./controllers/orders')
-router.get('/order', getAllOrders)
-router.post('/order', createOrder)
-router.get('/order/:id', findOrderById)
-router.put('/order/:id', updateOrder)
-router.delete('/order/:id', deleteOrderById)
+router.get('/api/order', getAllOrders)
+router.post('/api/order', createOrder)
+router.get('/api/order/:id', findOrderById)
+router.put('/api/order/:id', updateOrder)
+router.delete('/api/order/:id', deleteOrderById)
 
 module.exports = router
