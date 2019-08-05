@@ -14,10 +14,10 @@ import store from '../store'
 export default function Main() {
     return <Provider store={store}>
         <Router>
+            <CategorySelector />
             <Switch>
-                <Route path='/cart' exact component={Cart}></Route>
-                <Route path='/shop' exact component={ShopDisplay}></Route>
-                <Route path='/selector' exact component={CategorySelector}></Route>
+                <Route exact path='/cart' component={Cart}></Route>
+                <Route exact path='/shop' component={ShopDisplay}></Route>
             </Switch>
         </Router>
     </Provider>

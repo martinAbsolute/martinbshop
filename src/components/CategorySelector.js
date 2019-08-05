@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
+import { Link } from "react-router-dom";
 
 import { fetchCategories } from '../actions/categorySelector'
 import PropTypes from 'prop-types'
@@ -20,22 +21,26 @@ class CategorySelector extends Component {
         }
 
         const categories = this.props.categories
-        return <div>
+        return <ul>
             {categories.map(item =>
-                <div style={{ backgroundColor: 'blue' }}>
-                    <h3>{item.name}</h3>
-                    <h3>{item._id}</h3>
-                </div>
+                <Link key={item._id} to={{ pathname: "/shop", search: `?category=${item._id}` }}>
+                    <li>
+                        <h3>{item.name}</h3>
+                        <h3>{item._id}</h3>
+                    </li>
+                </Link>
             )}
-        </div>
+        </ul>
     }
 }
 
-const mapStateToProps = state => ({
-    categories: state.categories,
-    isLoading: state.categoriesLoading,
-    hasErrored: state.categoriesErrored,
-})
+const mapStateToProps = state => {
+    return {
+        categories: state.categorySelector.categories,
+        isLoading: state.categorySelector.categoriesLoading,
+        hasErrored: state.categorySelector.categoriesErrored,
+    }
+}
 
 const mapDispatchToProps = dispatch => {
     return {

@@ -20,7 +20,7 @@ class Cart extends Component {
         console.log(cart)
         return <div>
             {cart.map(id =>
-                <div style={{backgroundColor: '#ffe6ff'}}>
+                <div style={{ backgroundColor: '#ffe6ff' }}>
                     <h3>{id}</h3>
                     <button
                         type="button"
