@@ -25,7 +25,7 @@ class ProductPage extends Component {
             <h3>{product.name}</h3>
             <h3>{product._id}</h3>
             <p>Category:</p>
-            {/* <Link to={{ pathname: "/shop", search: `?category=${product.category._id}` }}>{product.category.name}</Link> */}
+            {product.category !== undefined ? <Link to={{ pathname: "/shop", search: `?category=${product.category._id}` }}>{product.category.name}</Link> : ''}
         </div>
     }
 }

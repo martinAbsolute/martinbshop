@@ -1,14 +1,15 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
+import { Link } from "react-router-dom";
 
-import { getCart, removeFromCart } from '../actions/cart'
+import { removeFromCart, fetchCartData } from '../actions/cart'
 import PropTypes from 'prop-types'
 
 class Cart extends Component {
 
     componentDidMount() {
-        this.props.getCart()
+        this.props.fetchCartData('http://localhost:3001/api/product/', this.props.cartIds)
     }
 
     deleteButtonClick = id => {
@@ -16,16 +17,25 @@ class Cart extends Component {
     }
 
     render() {
-        const { cart } = this.props.cart
-        console.log(cart)
+        if (this.props.isLoading) {
+            return <p>Loading...</p>
+        }
+        if (this.props.hasErrored) {
+            return <p>Sorry, there was a problem loading categories...</p>
+        }
+
+        const cartDetails = this.props.cartDetails
         return <div>
-            {cart.map(id =>
+            {cartDetails.map(product =>
                 <div style={{ backgroundColor: '#ffe6ff' }}>
-                    <h3>{id}</h3>
+                    <h3>{product.name}</h3>
+                    <p>{product.description}</p>
+                    <p>{product._id}</p>
+                    {product.category !== undefined ? <Link to={{ pathname: "/shop", search: `?category=${product.category._id}` }}>{product.category.name}</Link> : ''}
                     <button
                         type="button"
-                        onClick={() => this.deleteButtonClick(id)}>
-                        Remove
+                        onClick={() => this.deleteButtonClick(product._id)}>
+                        Remove from Cart
                     </button>
                 </div>
             )}
@@ -34,13 +44,24 @@ class Cart extends Component {
 }
 
 const mapStateToProps = state => ({
-    cart: state.cart
+    cartIds: state.cart.cartIds,
+    cartDetails: state.cart.cartDetails,
+    isLoading: state.cart.cartLoading,
+    hasErrored: state.cart.cartErrored,
+})
+
+const mapDispatchToProps = dispatch => ({
+    fetchCartData: (url, idArray) => dispatch(fetchCartData(url, idArray)),
+    removeFromCart: id => dispatch(removeFromCart(id)),
 })
 
 Cart.propTypes = {
-    getCart: PropTypes.func.isRequired,
+    cartIds: PropTypes.array.isRequired,
+    cartDetails: PropTypes.array.isRequired,
+    cartLoading: PropTypes.bool.isRequired,
+    cartErrored: PropTypes.bool.isRequired,
     removeFromCart: PropTypes.func.isRequired,
-    cart: PropTypes.array.isRequired,
+    fetchCartData: PropTypes.func.isRequired,
 }
 
-export default withRouter(connect(mapStateToProps, { getCart, removeFromCart })(Cart))
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Cart))
