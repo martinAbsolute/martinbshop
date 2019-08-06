@@ -4,7 +4,7 @@ const mongoose = require("mongoose")
 mongoose.set('debug', true)
 
 // Connect to DB
-mongoose.connect("mongodb://localhost/bagniukcrud", { useNewUrlParser: true })
+mongoose.connect("mongodb://localhost/martinbshop", { useNewUrlParser: true })
     .then(console.log("MongoDB connected..."))
     .catch(err => console.log(err))
 
