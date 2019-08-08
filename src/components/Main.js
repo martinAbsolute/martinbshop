@@ -53,7 +53,7 @@ export default function Main() {
                 <Header />
                 <Switch>
                     <Route exact path='/cart' component={Cart} />
-                    <Route exact path='/shop' render={props => <Grid container spacing={2}>
+                    <Route exact path='/shop' render={props => <Grid container>
                         <Grid item xs>
                             <CategorySelector />
                         </Grid>

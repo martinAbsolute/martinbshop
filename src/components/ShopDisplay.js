@@ -16,8 +16,8 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import CircularProgress from '@material-ui/core/CircularProgress'
-import Container from '@material-ui/core/Container'
 import GridList from '@material-ui/core/GridList'
+import { inherits } from 'util';
 class ShopDisplay extends Component {
 
     componentDidMount() {
@@ -40,7 +40,7 @@ class ShopDisplay extends Component {
 
     render() {
         if (this.props.isLoading) {
-            return <Container><CircularProgress /></Container>
+            return <CircularProgress style={{ position: 'absolute', left: '50%', top: '50%' }} />
         }
         if (this.props.hasErrored) {
             return <p>Sorry, there was a problem loading categories...</p>
@@ -49,10 +49,11 @@ class ShopDisplay extends Component {
         const products = this.props.products
         return <GridList>
             {products.map(item =>
-                <Card key={item._id} style={{ maxWidth: 300, margin: 15 }}>
+                <Card key={item._id} style={{ maxWidth: 300, margin: 15, padding: 0, height: inherits }}>
                     <CardActionArea>
                         <CardMedia
-                            // image="/static/images/cards/contemplative-reptile.jpg"
+                            style={{height: 150}}
+                            image={process.env.PUBLIC_URL + '/static/placeholder.png'}
                             title={item.name}
                         />
                         <CardContent>

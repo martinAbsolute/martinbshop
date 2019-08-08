@@ -8,7 +8,6 @@ import PropTypes from 'prop-types'
 
 //Material-UI
 import CircularProgress from '@material-ui/core/CircularProgress'
-import Container from '@material-ui/core/Container'
 
 class Cart extends Component {
 
@@ -22,7 +21,7 @@ class Cart extends Component {
 
     render() {
         if (this.props.isLoading) {
-            return <Container><CircularProgress /></Container>
+            return <CircularProgress style={{ position: 'absolute', left: '50%', top: '50%' }} />
         }
         if (this.props.hasErrored) {
             return <p>Sorry, there was a problem loading categories...</p>
