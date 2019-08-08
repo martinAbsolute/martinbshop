@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import { Link } from "react-router-dom";
@@ -80,10 +80,11 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-function Header({ cartIds, history }) {
+function Header({ cartIds, history, location }) {
     const classes = useStyles();
-    const [anchorEl, setAnchorEl] = React.useState(null);
-    const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
+    const [anchorEl, setAnchorEl] = useState(null);
+    const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
+    const [currentCategory, setCurrentCategory] = useState(null);
 
     const isMenuOpen = Boolean(anchorEl);
     const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
@@ -160,6 +161,13 @@ function Header({ cartIds, history }) {
         </Menu >
     );
 
+    useEffect(() => {
+        const params = new URLSearchParams(location.search)
+        fetch(`http://localhost:3001/api/category/${params.get("category")}`)
+            .then(res => res.json())
+            .then(category => setCurrentCategory(category.description))
+    }, [location.search])
+
     return (
         <div className={classes.grow}>
             <AppBar position="static">
@@ -174,8 +182,8 @@ function Header({ cartIds, history }) {
                         <MenuIcon />
                     </IconButton>
                     <Typography className={classes.title} variant="h6" noWrap>
-                        martinbshop
-          </Typography>
+                        martinbshop{currentCategory ? ` | ${currentCategory}` : ''}
+                    </Typography>
                     {/* <div className={classes.search}>
                         <div className={classes.searchIcon}>
                             <SearchIcon />
@@ -191,7 +199,7 @@ function Header({ cartIds, history }) {
                     </div> */}
                     <div className={classes.grow} />
                     <div className={classes.sectionDesktop}>
-                        <IconButton aria-label="show cart" color="inherit" onClick={()=>handleCartButtonClick()}>
+                        <IconButton aria-label="show cart" color="inherit" onClick={() => handleCartButtonClick()}>
                             <Badge badgeContent={cartIds.length} color="secondary">
                                 <ShoppingCartIcon />
                             </Badge>

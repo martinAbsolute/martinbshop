@@ -25,7 +25,7 @@ import store from '../store'
 export default function Main() {
 
     const cartFab = <Zoom
-        key={'primary'}
+        key={'secondary'}
         in={true}
         unmountOnExit
         timeout={300}
@@ -33,7 +33,7 @@ export default function Main() {
         <Link to="/cart">
             <Fab
                 aria-label='cart'
-                color='primary'
+                color='secondary'
                 size='large'
                 style={{
                     position: 'absolute',

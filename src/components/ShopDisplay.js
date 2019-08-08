@@ -40,7 +40,7 @@ class ShopDisplay extends Component {
 
     render() {
         if (this.props.isLoading) {
-            return <CircularProgress style={{ position: 'absolute', left: '50%', top: '50%' }} />
+            return <CircularProgress color='secondary' style={{ position: 'absolute', left: '50%', top: '50%' }} />
         }
         if (this.props.hasErrored) {
             return <p>Sorry, there was a problem loading categories...</p>
@@ -50,28 +50,30 @@ class ShopDisplay extends Component {
         return <GridList>
             {products.map(item =>
                 <Card key={item._id} style={{ maxWidth: 300, margin: 15, padding: 0, height: inherits }}>
-                    <CardActionArea>
-                        <CardMedia
-                            style={{height: 150}}
-                            image={process.env.PUBLIC_URL + '/static/placeholder.png'}
-                            title={item.name}
-                        />
-                        <CardContent>
-                            <Typography gutterBottom variant="h5" component="h2">
-                                {item.name}
-                            </Typography>
-                            <Typography variant="body2" color="textSecondary" component="p">
-                                {item.description}
-                            </Typography>
-                        </CardContent>
-                    </CardActionArea>
+                    <Link to={`/product/${item._id}`}>
+                        <CardActionArea>
+                            <CardMedia
+                                style={{ height: 150 }}
+                                image={process.env.PUBLIC_URL + '/static/placeholder.png'}
+                                title={item.name}
+                            />
+                            <CardContent style={{ height: 80 }}>
+                                <Typography gutterBottom variant="h5" component="h2">
+                                    {item.name}
+                                </Typography>
+                                <Typography variant="body2" color="textSecondary" component="p">
+                                    {item.description}
+                                </Typography>
+                            </CardContent>
+                        </CardActionArea>
+                    </Link>
                     <CardActions>
-                        <Button size="small" color="primary" onClick={() => this.addToCartButtonClick(item._id)}>
+                        <Button size="small" color="secondary" onClick={() => this.addToCartButtonClick(item._id)}>
                             Add To Cart
                         </Button>
                         <Link to={`/product/${item._id}`}>
                             <Button size="small" color="primary">
-                                Learn More
+                                Details
                             </Button>
                         </Link>
                     </CardActions>

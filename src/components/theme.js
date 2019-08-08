@@ -1,10 +1,12 @@
 import { createMuiTheme } from '@material-ui/core/styles'
-import deepPurple from '@material-ui/core/colors/deepPurple'
-import purple from '@material-ui/core/colors/purple'
+import grey from '@material-ui/core/colors/grey'
+import pink from '@material-ui/core/colors/pink'
 
 export default createMuiTheme({
   palette: {
-    primary: deepPurple,
-    secondary: purple
+    primary: {
+      main: grey[900]
+    },
+    secondary: pink
   }
 })

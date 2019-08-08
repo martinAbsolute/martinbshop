@@ -21,7 +21,7 @@ class Cart extends Component {
 
     render() {
         if (this.props.isLoading) {
-            return <CircularProgress style={{ position: 'absolute', left: '50%', top: '50%' }} />
+            return <CircularProgress color='secondary' style={{ position: 'absolute', left: '50%', top: '50%' }} />
         }
         if (this.props.hasErrored) {
             return <p>Sorry, there was a problem loading categories...</p>

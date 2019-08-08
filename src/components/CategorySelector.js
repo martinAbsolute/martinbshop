@@ -13,7 +13,6 @@ import ListItemText from '@material-ui/core/ListItemText'
 import Paper from '@material-ui/core/Paper'
 
 import CircularProgress from '@material-ui/core/CircularProgress'
-import Container from '@material-ui/core/Container'
 class CategorySelector extends Component {
 
     componentDidMount() {
@@ -22,7 +21,7 @@ class CategorySelector extends Component {
 
     render() {
         if (this.props.isLoading) {
-            return <Container><CircularProgress /></Container>
+            return <CircularProgress color='secondary' style={{ position: 'absolute', left: '50%', top: '50%' }} />
         }
         if (this.props.hasErrored) {
             return <p>Sorry, there was a problem loading categories...</p>
