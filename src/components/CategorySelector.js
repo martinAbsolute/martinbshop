@@ -6,6 +6,14 @@ import { Link } from "react-router-dom";
 import { fetchCategories } from '../actions/categorySelector'
 import PropTypes from 'prop-types'
 
+//Material-UI
+import List from '@material-ui/core/List'
+import ListItem from '@material-ui/core/ListItem'
+import ListItemText from '@material-ui/core/ListItemText'
+import Paper from '@material-ui/core/Paper'
+
+import CircularProgress from '@material-ui/core/CircularProgress'
+import Container from '@material-ui/core/Container'
 class CategorySelector extends Component {
 
     componentDidMount() {
@@ -14,23 +22,24 @@ class CategorySelector extends Component {
 
     render() {
         if (this.props.isLoading) {
-            return <p>Loading...</p>
+            return <Container><CircularProgress /></Container>
         }
         if (this.props.hasErrored) {
             return <p>Sorry, there was a problem loading categories...</p>
         }
 
         const categories = this.props.categories
-        return <ul>
-            {categories.map(item =>
-                <Link key={item._id} to={{ pathname: "/shop", search: `?category=${item._id}` }}>
-                    <li>
-                        <h3>{item.name}</h3>
-                        <h3>{item._id}</h3>
-                    </li>
-                </Link>
-            )}
-        </ul>
+        return <Paper style={{ margin: 15 }}>
+            <List aria-label="categories selector">
+                {categories.map(item =>
+                    <Link to={{ pathname: "/shop", search: `?category=${item._id}` }}>
+                        <ListItem button key={item._id}>
+                            <ListItemText primary={item.name} />
+                        </ListItem>
+                    </Link>
+                )}
+            </List>
+        </Paper>
     }
 }
 

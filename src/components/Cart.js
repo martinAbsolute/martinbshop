@@ -6,6 +6,10 @@ import { Link } from "react-router-dom";
 import { removeFromCart, fetchCartData } from '../actions/cart'
 import PropTypes from 'prop-types'
 
+//Material-UI
+import CircularProgress from '@material-ui/core/CircularProgress'
+import Container from '@material-ui/core/Container'
+
 class Cart extends Component {
 
     componentDidMount() {
@@ -18,7 +22,7 @@ class Cart extends Component {
 
     render() {
         if (this.props.isLoading) {
-            return <p>Loading...</p>
+            return <Container><CircularProgress /></Container>
         }
         if (this.props.hasErrored) {
             return <p>Sorry, there was a problem loading categories...</p>

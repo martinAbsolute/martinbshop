@@ -7,6 +7,17 @@ import { fetchProducts } from '../actions/shopDisplay'
 import { addToCart } from '../actions/cart'
 import PropTypes from 'prop-types'
 
+//Material-UI
+import Card from '@material-ui/core/Card';
+import CardActionArea from '@material-ui/core/CardActionArea';
+import CardActions from '@material-ui/core/CardActions';
+import CardContent from '@material-ui/core/CardContent';
+import CardMedia from '@material-ui/core/CardMedia';
+import Button from '@material-ui/core/Button';
+import Typography from '@material-ui/core/Typography';
+import CircularProgress from '@material-ui/core/CircularProgress'
+import Container from '@material-ui/core/Container'
+import GridList from '@material-ui/core/GridList'
 class ShopDisplay extends Component {
 
     componentDidMount() {
@@ -29,26 +40,43 @@ class ShopDisplay extends Component {
 
     render() {
         if (this.props.isLoading) {
-            return <p>Loading...</p>
+            return <Container><CircularProgress /></Container>
         }
         if (this.props.hasErrored) {
             return <p>Sorry, there was a problem loading categories...</p>
         }
 
         const products = this.props.products
-        return <ul>
+        return <GridList>
             {products.map(item =>
-                <li key={item._id}>
-                    <Link to={`/product/${item._id}`}>
-                        <h3>{item.name}</h3>
-                        <h3>{item._id}</h3>
-                    </Link>
-                    <button type='button' onClick={() => this.addToCartButtonClick(item._id)}>
-                        Add to Cart
-                    </button>
-                </li>
+                <Card key={item._id} style={{ maxWidth: 300, margin: 15 }}>
+                    <CardActionArea>
+                        <CardMedia
+                            // image="/static/images/cards/contemplative-reptile.jpg"
+                            title={item.name}
+                        />
+                        <CardContent>
+                            <Typography gutterBottom variant="h5" component="h2">
+                                {item.name}
+                            </Typography>
+                            <Typography variant="body2" color="textSecondary" component="p">
+                                {item.description}
+                            </Typography>
+                        </CardContent>
+                    </CardActionArea>
+                    <CardActions>
+                        <Button size="small" color="primary" onClick={() => this.addToCartButtonClick(item._id)}>
+                            Add To Cart
+                        </Button>
+                        <Link to={`/product/${item._id}`}>
+                            <Button size="small" color="primary">
+                                Learn More
+                            </Button>
+                        </Link>
+                    </CardActions>
+                </Card>
             )}
-        </ul>
+        </GridList>
     }
 }
 
