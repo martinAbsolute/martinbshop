@@ -5,7 +5,7 @@ In the project directory, you can run:
 
 ### `npm run start:fe`
 
-Runs the front-end of the app, accessible @ http://http:localhost:3000
+Runs the front-end of the app, accessible @ http://http:localhost:3000/shop
 
 ### `npm run start:be`
 

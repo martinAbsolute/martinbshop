@@ -32,8 +32,8 @@ class CategorySelector extends Component {
         return <Paper style={{ margin: 15 }}>
             <List aria-label="categories selector">
                 {categories.map(item =>
-                    <Link to={{ pathname: "/shop", search: `?category=${item._id}` }}>
-                        <ListItem button key={item._id}>
+                    <Link key={item._id} to={{ pathname: "/shop", search: `?category=${item._id}` }}>
+                        <ListItem button>
                             <ListItemText primary={item.name} />
                         </ListItem>
                     </Link>
