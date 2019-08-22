@@ -6,6 +6,7 @@ import ShopDisplay from './ShopDisplay'
 import CategorySelector from './CategorySelector'
 import ProductPage from './ProductPage';
 import Header from './Header'
+import AddProductForm from './AddProductForm'
 
 // Material-UI
 import { ThemeProvider } from '@material-ui/styles'
@@ -53,6 +54,7 @@ export default function Main() {
                 <Header />
                 <Switch>
                     <Route exact path='/cart' component={Cart} />
+                    <Route exact path='/add' component={AddProductForm} />
                     <Route exact path='/shop' render={props => <Grid container>
                         <Grid item xs>
                             <CategorySelector />

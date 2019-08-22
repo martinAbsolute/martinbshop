@@ -1,7 +1,9 @@
 import React from 'react'
 import { Formik, Form, Field, ErrorMessage } from 'formik';
+import { connect } from 'react-redux'
+import { withRouter } from 'react-router-dom'
 
-const AppProductForm = () => <Formik
+const AddProductForm = () => <Formik
     initialValues={{ email: '', password: '' }}
     validate={values => {
         let errors = {};
@@ -34,4 +36,4 @@ const AppProductForm = () => <Formik
     )}
 </Formik>
 
-export default AppProductForm
+export default withRouter(connect()(AddProductForm))
